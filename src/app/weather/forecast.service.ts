@@ -12,7 +12,7 @@ import {
   toArray,
 } from 'rxjs';
 
-interface openWeatherResponse {
+export interface openWeatherResponse {
   list: {
     dt_txt: string;
     main: {

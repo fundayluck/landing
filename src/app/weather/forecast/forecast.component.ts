@@ -7,13 +7,17 @@ import { ForecastService } from '../forecast.service';
   styleUrl: './forecast.component.css',
 })
 export class ForecastComponent implements OnInit {
-  
+  foreCastData: any[] = [];
 
   constructor(private forecastService: ForecastService) {
-    forecastService.getForcast().subscribe((weatherResponse) => {
-      console.log(weatherResponse);
+    forecastService.getForcast().subscribe((foreCastData) => {
+      this.foreCastData = foreCastData;
     });
   }
 
   ngOnInit(): void {}
+
+  getDayAndTemp(arg0: any, arg1: any) {
+    throw new Error('Method not implemented.');
+  }
 }
