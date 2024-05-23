@@ -9,11 +9,12 @@ import {
   pluck,
   retry,
   switchMap,
+  toArray,
 } from 'rxjs';
 
 interface openWeatherResponse {
   list: {
-    dt_text: string;
+    dt_txt: string;
     main: {
       temp: number;
     };
@@ -41,7 +42,14 @@ export class ForecastService {
       ),
       pluck('list'),
       mergeMap((value) => of(...value)),
-      filter((value, index) => index % 8 === 0)
+      filter((value, index) => index % 8 === 0),
+      map((value) => {
+        return {
+          dateString: value.dt_txt,
+          temp: value.main.temp,
+        };
+      }),
+      toArray()
     );
   }
 
