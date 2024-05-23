@@ -2,6 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, retry, switchMap } from 'rxjs';
 
+interface openWeatherResponse {
+  list: {
+    dt_text: string;
+    main: {
+      temp: number;
+    };
+  }[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +27,10 @@ export class ForecastService {
           .set('units', 'metric')
           .set('appid', '7f1160f2208fbd69d1604edf7339633b');
       }),
-      switchMap((params) => this.http.get(this.url, { params }))
+      switchMap((params) =>
+        this.http.get<openWeatherResponse>(this.url, { params })
+      ),
+      map((val) => val.list)
     );
   }
 

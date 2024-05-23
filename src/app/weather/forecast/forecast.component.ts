@@ -7,6 +7,8 @@ import { ForecastService } from '../forecast.service';
   styleUrl: './forecast.component.css',
 })
 export class ForecastComponent implements OnInit {
+  
+
   constructor(private forecastService: ForecastService) {
     forecastService.getForcast().subscribe((weatherResponse) => {
       console.log(weatherResponse);
